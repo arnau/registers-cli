@@ -112,7 +112,6 @@ def build_command(rsf_file, target):
 
         build_openapi(build_path, register)
 
-
         click.secho("Build complete.", fg="green", bold=True)
 
     except RegistersException as err:
@@ -302,10 +301,10 @@ def build_cloudfoundry(path: Path, register: Register):
         with open(path.joinpath(filename), "wb") as handle:
             handle.write(pkg_resources.resource_string("registers", cf_path))
 
-    manifest = yaml.load(pkg_resources.resource_stream("registers", "data/cloudfoundry/manifest.yml"), Loader=yaml.BaseLoader)  # NOQA
-    manifest["applications"][0]["name"] = register.uid
+    manifest = yaml.load(pkg_resources.resource_stream("registers", "data/cloudfoundry/manifest.yml"), Loader=yaml.BaseLoader)  # type: ignore #TODO review type warning # NOQA
+    manifest["applications"][0]["name"] = register.uid # NOQA
 
-    with open(path.joinpath("manifest.yml"), "w") as handle:
+    with open(path.joinpath("manifest.yml"), "w") as handle: # type: ignore #TODO review type warning # NOQA
         handle.write(yaml.dump(manifest))
 
 
