@@ -98,8 +98,8 @@ def build_register(rsf_file, target):
 
         build_path.mkdir(parents=True)
 
-        if target == "netlify":
-            build_target_resource("_redirects", "netlify", build_path)
+        # if target == "netlify":
+        #     build_target_resource("_redirects", "netlify", build_path)
 
         if target == "docker":
             build_docker(build_path)
@@ -193,7 +193,7 @@ def build_records(path: Path, register: Register):
         for key, record in bar:
             write_resource(path.joinpath(key), record, headers)
 
-            build_record_trail(path.joinpath(key), register.trail(key))
+            # build_record_trail(path.joinpath(key), register.trail(key))
 
 
 def build_record_trail(path: Path, trail: List[Entry]):
@@ -345,5 +345,5 @@ def write_resource(path: Path, obj, headers):
     Generates the pair of files (csv, json) for the given object.
     """
 
-    utils.write_csv_resource(path, obj, headers)
+    # utils.write_csv_resource(path, obj, headers)
     utils.write_json_resource(path, obj)
